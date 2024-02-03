@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::query()->get();
+        return $posts;
     }
 
     /**
@@ -21,7 +22,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $requestData = $request->all();
+        return Post::create($requestData);
     }
 
     /**
@@ -29,7 +31,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post;
     }
 
     /**
@@ -37,7 +39,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $requestData = $request->all();
+        $post->update($requestData);
+        return $post;
     }
 
     /**
@@ -45,6 +49,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return response()->json(null,204);
     }
 }
